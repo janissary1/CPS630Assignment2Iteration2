@@ -1,0 +1,158 @@
+#modal-content{
+    visibility: hidden;
+}
+#invoice{
+    visibility: hidden;
+    color: #EEFAA2;
+}
+.form{
+    color: black;
+}
+
+#shop {
+    visibility: hidden;
+    position: absolute;
+    margin: 100px;
+    top: 0;
+    right: 250px;
+    padding: 10px;
+    text-align: left;
+    color: #EEFAA2;
+}
+#cart{
+    float: right;
+    font-size: 28px;
+    padding-right: 20px;
+    visibility: hidden;
+}
+
+.right-float {
+	margin: 50px;
+	position: absolute;
+	top: 0;
+	right: 0;
+	padding: 10px;
+	text-align: left;
+	width: 40%;
+}
+body {
+  background-color: #c92828;
+  margin:0;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+.navbar {
+  overflow: hidden;
+  margin: 0;
+  background-color: #333;
+  top: 0;
+  width: 100%;
+}
+.selectionbar {
+  background-color:rgb(73, 73, 73);
+  overflow: hidden;
+  height: 25px;
+  display: inline-block;
+  width: 100%;
+}
+.navbar a {
+  float: left;
+  display: block;
+  color: #EEFAA2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.navbar a:hover {
+  background-color: #C92828;
+}
+
+.main {
+  padding: 16px;
+  margin-top: 30px;
+  height: 100px; 
+}
+
+h2 {
+    color: #EEFAA2;
+}
+
+.images {
+    float:left;
+    border-style: solid;
+    border-width: 2px;
+    border-color: black;
+}
+.modal-content {
+    background-color: #333;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    height: 65%;
+}
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.close:hover,.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+.modal {
+    display: hidden; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 50px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.4); 
+}
+.artists {
+    float: right;
+    margin: 0 189px 10px 50px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: black;
+    color: #EEFAA2;
+}
+
+.artist_drop select, .artwork_drop select, .museum_drop select{
+    background-color: rgb(73, 73, 73);
+    color: #EEFAA2;
+}
+
+#AboutUs
+{
+    padding-top: 150px;
+    text-align: center;
+}
+
+#aki
+{
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+#belli
+{
+    padding-left: 30px;
+    padding-right: 30px; 
+}
+
+.info
+{
+    margin:  0px 90px 0px 90px;
+    text-align: center;
+    color: #EEFAA2;
+}

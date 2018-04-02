@@ -1,0 +1,8 @@
+@import url('https://fonts.googleapis.com/css?family=Libre+Baskerville');
+div {
+	text-align: center;
+	vertical-align: middle;
+	font-family: "Libre Baskerville";
+	font-size: "32px";
+	color: #EEFAA2;
+}

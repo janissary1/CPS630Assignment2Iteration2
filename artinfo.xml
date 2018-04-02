@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <art>
+        <title>The Great Wave</title>
+        <artist>Katsushika Hokusai</artist>
+        <year>1826</year>
+        <dimensions>26cm x 38cm</dimensions>
+        <genre>Marine Art</genre>
+        <type>Ink</type>
+        <price>499$</price>
+    </art>
+
+    <art>
+        <title>Napoleon Returns</title>
+        <artist>Charles Baron von Steuben</artist>
+        <year>1818</year>
+        <dimensions>49.8cm x 59.8cm</dimensions>
+        <genre>Classical</genre>
+        <type>Engraving(original)</type>
+        <price>1000$</price>
+    </art>
+
+    <art>
+        <title>The Son of Man</title>
+        <artist>Renée Margritte</artist>
+        <year>1964</year>
+        <dimensions>26cm x 38cm</dimensions>
+        <genre>Surrealism</genre>
+        <type>Oil on Canvas</type>
+        <price>150$</price>
+    </art>
+
+    <art>
+        <title>Weeping Woman</title>
+        <artist>Pablo Picasso</artist>
+        <year>1937</year>
+        <dimensions>60cm x 49cm</dimensions>
+        <genre>Cubism</genre>
+        <type>Oil on Canvas</type>
+        <price>200$</price>
+    </art>
+
+    <art>
+        <title>Liberty Leading the People</title>
+        <artist>Eugène Delacroix</artist>
+        <year>1830</year>
+        <dimensions>260cm x 325cm</dimensions>
+        <genre>Classical</genre>
+        <type>Oil on Canvas</type>
+        <price>450$</price>
+    </art>
+</root>

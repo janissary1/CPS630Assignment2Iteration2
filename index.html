@@ -1,0 +1,266 @@
+<!--CPS 630 ASSIGNMENT 2 ITERATION 1: BY AKASH RAI 500763706 & DANIEL BELLISSIMO 500749419 //TEAM 27 -->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Art Gallery</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link href="main.css" rel="stylesheet" type="text/css"/>
+        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
+        <script>
+        function artchange(location){
+            var selection = document.getElementById(location);
+            var newSrc = selection.options[selection.selectedIndex].value;
+            var title = selection.options[selection.selectedIndex].text;
+            
+        
+            newSrc = "iframes/".concat(newSrc); //add path to image
+            document.getElementById("frame1").setAttribute('src', newSrc); //change iframe1 to ***.jpg
+            createLinkobject(title,newSrc);
+            setModal(location,title,newSrc);
+            var x = newSrc.slice(0,-3); //remove .jpg
+            var y = x.concat("html"); //insert .html
+            document.getElementById("frame2").setAttribute('src', y); //change iframe2 to ***.html
+            selection.selectedIndex = 0; //reset dropdown
+            }
+        function createLinkobject(title,image){
+            var a = document.getElementById("title");
+            a.innerHTML = title;
+            a.style = "text-align: center;color: #EEFAA2;";
+        }
+        function setModal(location, name, image) {
+            if (location == 'Artist'){document.getElementById("cart").style.visibility = "hidden";}
+            else if (location == 'Works'){document.getElementById("cart").style.visibility = "visible";}
+            document.getElementById("modalText").name = name;
+            document.getElementById("img").src = image;
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+               if (this.readyState == 4 && this.status == 200) {
+                 processXML(this, location, name, image);}
+                };
+           
+            xhttp.open("GET", "Artist.xml", true);
+            xhttp.send();
+		}
+        function processXML(xml,location,name,image){
+            var p = "";
+            var xmlDoc = xml.responseXML;
+            var x = xmlDoc.getElementsByTagName(location.toLowerCase());
+            var length = x.length;
+            var ptext = document.getElementById("modalText");
+            if (location == "Works") {
+                for (i = 0; i < 5; i++) {
+                    var title = x[i].getElementsByTagName("title")[0].childNodes[0].nodeValue
+                    if (title == name) {
+                        p += "Name: " + title + "<br>"
+                            +"Artist: "+ x[i].getElementsByTagName("artist")[0].childNodes[0].nodeValue + "<br>"
+                            +"Year made: "+ x[i].getElementsByTagName("year")[0].childNodes[0].nodeValue + "<br>"
+                            +"Dimensions: "+ x[i].getElementsByTagName("dimensions")[0].childNodes[0].nodeValue + "<br>"
+                            +"Genre: "+ x[i].getElementsByTagName("genre")[0].childNodes[0].nodeValue + "<br>"
+                            +"Type: "+ x[i].getElementsByTagName("type")[0].childNodes[0].nodeValue + "<br>"
+                            +"Price: "+ x[i].getElementsByTagName("price")[0].childNodes[0].nodeValue + "<br>";
+                            ptext.setAttribute("data-price",x[i].getElementsByTagName("price")[0].childNodes[0].nodeValue);
+                    }
+                }
+            }
+            else if (location == "Artist") {
+                
+                for (i = 0; i < 5; i++) {
+                    var person = x[i].getElementsByTagName("name")[0].childNodes[0].nodeValue
+                    if (person == name) {
+                        p += "Artist Name: " + person + "<br>"
+                            + "Date of Birth: " + x[i].getElementsByTagName("dob")[0].childNodes[0].nodeValue + "<br>"
+                            + "Date of Death: " + x[i].getElementsByTagName("dod")[0].childNodes[0].nodeValue + "<br>"
+                            + "Place of Living: " + x[i].getElementsByTagName("pol")[0].childNodes[0].nodeValue + "<br>"
+                            + "Genres: " + x[i].getElementsByTagName("genres")[0].childNodes[0].nodeValue + "<br>"
+                            + "Notable Works: " + x[i].getElementsByTagName("notable")[0].childNodes[0].nodeValue + "<br>";
+                        
+                        }
+                    }
+            }
+            document.getElementById("modalText").style.visibility = "visible";
+            document.getElementById("modalText").innerHTML = p;
+        }
+        function openModal(){
+            var modal = document.getElementById('myModal');
+            document.getElementById('modalText').style.visibility = "visible";
+            document.getElementById("invoice").style.visibility = "none";
+            modal.style.display = "block";
+        }
+
+        function closeModal(){
+            var modal = document.getElementById('myModal');
+            document.getElementById("shop").style.visibility = "hidden";
+            document.getElementById("invoice").style.visibility = "hidden";
+            modal.style.display = "none";
+        }
+        function shopping(){
+            var shopStyle = document.getElementById("shop").style;
+            shopStyle.visibility = "visible";
+            document.getElementById("modalText").style.visibility = "hidden";
+        }
+        function formSubmit(){
+            var title = document.getElementById("title").innerHTML; //name of the art
+            var price = document.getElementById("modalText").getAttribute("data-price");
+            var number = document.getElementById("buy").value;
+            setCookie(title,number,0);
+            closeModal();
+            
+        }
+        function getCookie(cname) {
+            var name = cname + "=";
+            var decodedCookie = decodeURIComponent(document.cookie);
+            var ca = decodedCookie.split(';');
+            for(var i = 0; i <ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length).split(":"); //returns an array
+                }
+            }
+            return null;
+        }
+        function setCookie(name, value, days){
+            var price = document.getElementById("modalText").getAttribute("data-price");
+            if (days)
+            {
+                var date = new Date();
+                date.setTime(date.getTime()+days*24*60*60*1000); // ) removed
+                var expires = "; expires=" + date.toGMTString(); // + added
+            }
+            else
+                var expires = "";
+            document.cookie = name+"=" + value+":"+price+expires + ";path=/"; // + and " added
+            }
+        function invoice(){
+            var elem = document.getElementById("invoice");
+            var str = "You are purchasing: <br>" ;
+        
+            var decodedCookie = decodeURIComponent(document.cookie);
+            var sum = 0, trueSum = 0;
+            var ca = decodedCookie.split(';');
+            var name = "";
+            for (var i = 1; i < ca.length;i++){
+                var two = ca[i].split(":");
+                var num = two[0].split("=")[1];
+                var name = two[0].split("=")[0]
+
+                var price = two[1].replace("$","");
+                sum = parseInt(num) * Number(price);
+                str += name + ": "+ num.toString() + " * " + price.toString() + "$" + " = " + sum.toString() +"<br>";
+                trueSum += sum;
+            }
+            var option = document.getElementById("shipping");
+            var ship = option.options[option.selectedIndex].value;
+            if (ship == "Standard Shipping"){var shipPrice = 10;}
+            else if (ship == "Express Shipping"){var shipPrice = 20;}
+            str += "Subtotal is: " + (trueSum).toString() + "<br>Tax is 13%: = " + ((trueSum+trueSum*0.13)).toString() +"<br>";
+            str += "With " + ship + "(" + shipPrice + "$)" + "<br>The Total is: " + (((trueSum+trueSum*0.13)+shipPrice)).toString() + "$";
+            elem.style.visibility = "visible";
+            document.getElementById("invoiceText").innerHTML = str;
+          
+            document.getElementById("invoice").style.visibility = "visible";
+            var modal = document.getElementById('myModal');
+            document.getElementById('modalText').style.visibility = "none";
+            modal.style.display = "block";
+        }
+        </script>
+
+    </head>
+   <body>
+        <div id="myModal" class="modal">
+                <div class="modal-content">
+                  <span class="close" onclick=closeModal()>&times;</span>
+                  <a href="#cart" id="cart" onclick="shopping()"><span class="glyphicon glyphicon-shopping-cart padleft"></span></a>
+                  <img id="img" src="">
+                  <div class="right-float"><p style="color: #EEFAA2" id="modalText" name="" data-price="">kek</p></div>
+                </div>
+                <div id="shop">
+                    
+                    <form id="shopping" >
+                        Enter the number of works you want:
+                        <input id="buy" type="text" style="width: 20px" class="form">
+                        <br>
+                        <input type='submit' value="Submit" onclick="formSubmit()" class="form">
+                    </form>
+                </div>
+                <span class="close" onclick=closeModal()>&times;</span>
+                <div style="color: #EEFAA2; visibility: none;" id="invoice" class="right-float">
+                        Choose your shipping: 
+                        <select name="Shipping" id="shipping" class="form"  onchange="invoice()">
+                            <option value="Standard Shipping" selected>Standard Shipping</option>
+                            <option value="Express Shipping">Express Shipping</option>
+                        </select>
+                        <div class="right-float"><p style="color: #EEFAA2" id="invoiceText"></p></div>
+                        
+                </div>
+                
+        </div>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="main.css" rel="stylesheet" type="text/css"/>
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
+              
+  
+        <div class="navbar">
+            <a href="#Gallery">Gallery</a>
+            <a href="#learn">About Us</a>
+            <a href="#learn">Blogs</a>
+            <a href="#cart" onclick=invoice()><span class="glyphicon glyphicon-shopping-cart padleft">Checkout</span></a>
+        </div>
+        <div class="selectionbar">
+            <div id="Gallery">
+                <div style="display: inline-block;" class="artwork_drop">
+                    <form id="artworks">
+                        <select name="Works" id="Works" method="get" onchange="artchange('Works')">
+                            <option value="basic.jpg" selected>Select</option>
+                            <option value="libertyleading.jpg">Liberty Leading the People</option>
+                            <option value="napoleonreturns.jpg">Napoleon's Return from Elba</option>
+                            <option value="greatwave.jpg">The Great Wave off Kanagawa</option>
+                            <option value="thesonofman.jpg">The Son of Man</option>
+                            <option value="Weeping Woman.jpg">Weeping Woman</option>
+                        </select>
+                    </form>
+                </div>
+            <div style="display: inline-block;" class="artist_drop">
+                <form>
+                    <select id="Artist" method="get" onchange="artchange('Artist')">
+                        <option value="basic.jpg" selected>Artist</option>
+                        <option value="eugenedelacroix.jpg">Eugène Delacroix</option>
+                        <option value="steuben.jpg">Charles Baron von Steuben</option>
+                        <option value="katsushika.jpg">Katsushika Hokusai</option>
+                        <option value="rene.jpg">Renée Magritte</option>
+                        <option value="picasso.jpg">Pablo Picasso</option>
+                    </select>
+                </form>
+            </div>
+            <div style="display: inline-block;" class="museum_drop">
+                <form>
+                    <select id="Artist" method="get" onchange="artchange('Artist')">
+                        <option value="" selected>Museum</option>
+                    </select>
+                </form>
+            </div>
+        </div>
+        </div>
+        <br>
+        <div><h2 id="title" style="text-align: center;color: #EEFAA2;visibility: hidden;" onclick=openModal()>Kek</h2></div>
+        <div style="text-align: center">
+            <iframe id="frame1" height="400" width="500" frameborder="0"></iframe>
+            <iframe id="frame2" height="400" width="500" frameborder="0"></iframe>
+        </div>
+        <div id="AboutUs">
+            <h2 id="abt">About Us</h2>
+                <div class="team">
+                    <img src="iframes/Akash.jpg" alt="Akash" id="aki" style="width:20%;"/>
+                    <img src="iframes/Daniel.jpg" alt="Daniel" id="belli" style="width:20%;"/>
+                </div>
+                <div class="info">
+                    <p id="learn">We are Akash (on the left) and Daniel (on the right). We are second year Computer Science students who are working on becoming proficient full-stack developers.
+                    Daniel worked on the JQuery code to make sure the drop down bar is functional. Akash was responsible for the front-end  design to make sure it looks decent. We both 
+                    collaborated on the general design of our web page.</p>
+                </div>
+        </div>
+    </body>
+</html>

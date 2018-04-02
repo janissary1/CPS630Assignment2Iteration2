@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <artist>
+        <name>Eugène Delacroix</name>
+        <dob>26 April 1798</dob>
+        <dod>13 August 1863</dod>
+        <pol>Paris, France</pol>
+        <genres>Romantic</genres>
+        <notable>Liberty Leading the People</notable>
+    </artist>
+
+    <artist>
+        <name>Katsushika Hokusai</name>
+        <dob>31 October 1760</dob>
+        <dod>May 10 1849</dod>
+        <pol>Edo(Tokyo), Japan</pol>
+        <genres>Ukiyo-e</genres>
+        <notable>The Great Wave off Kanagawa</notable>
+    </artist>
+
+    <artist>
+        <name>Picasso</name>
+        <dob>25 October 1881</dob>
+        <dod>8 April 1973</dod>
+        <pol>Mougins, France</pol>
+        <genres>Cubism, Surrealism</genres>
+        <notable>La Vie</notable>
+    </artist>
+
+    <artist>
+        <name>Charles Baron von Steuben</name>
+        <dob>18 April 1788</dob>
+        <dod>21 November 1856</dod>
+        <pol>Paris, France, Saint Petersburg Russia</pol>
+        <genres>Romantic</genres>
+        <notable>Bataille de Poitiers</notable>
+    </artist>
+
+     <artist>
+        <name>Renée Margritte</name>
+        <dob>21 November 1898</dob>
+        <dod>15 August 1967</dod>
+        <pol>Brussels, Belgium</pol>
+        <genres>Surrealism</genres>
+        <notable>The Treachery of Images</notable>
+    </artist>
+</root>
